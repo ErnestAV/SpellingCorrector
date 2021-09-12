@@ -40,19 +40,26 @@ public class Trie implements ITrie {
         String fixedWord = word.toLowerCase();
         int index = 0;
         char letter;
-        INode aChild = thisNode.getChildren()[index];
+        INode aChild;
 
         for (int i = 0; i < fixedWord.length(); i++) { //traverse through the trie
             letter = fixedWord.charAt(i);
             index = letter - 'a';
-            aChild = thisNode.getChildren()[index]; //child found
+            aChild = thisNode.getChildren()[index]; //child
 
+            // TODO: 9/12/21 fix case when a word is found early (caresses vs caress test case) 
+            if (aChild == null) { //child not found
+                return null;
+            }
+            /**
+            if (!(thisNode.getChildren()[index].getValue() > 0) && thisNode.getChildren()[index].getChildren() != null) {
+                return null;
+            }
+             **/
             if (!(thisNode.getChildren()[index].getValue() > 0)) { //If it is greater than 0 return the child
                 return thisNode.getChildren()[index];
             }
-            else if (aChild == null) { //child not found
-                return null;
-            }
+            //&& thisNode.getChildren()[index + 1] != null
         }
 
         return null;
