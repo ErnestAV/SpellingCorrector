@@ -1,0 +1,4 @@
+
+S	java:S106"9Replace this use of System.out or System.err by a logger.(É¤¨üÿÿÿÿ
+]
+java:S2259"GA "NullPointerException" could be thrown; "corrector" is nullable here.(º¦¦¢

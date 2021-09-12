@@ -4,16 +4,16 @@ import java.util.Dictionary;
 
 public class Trie implements ITrie {
 
-    private INode root;
+    private INode root = new Node();
     private int wordCount;
     private int nodeCount = 1;
 
     @Override
     public void add(String word) { //Check with TA
-        INode thisNode = root;
+        INode thisNode = this.root;
         String fixedWord = word.toLowerCase();
         int index = 0;
-        int letter = 0;
+        char letter;
         //boolean fixedWordEnd = false;
 
         for (int i = 0; i < fixedWord.length(); i++) { //traverse through the trie
@@ -22,16 +22,16 @@ public class Trie implements ITrie {
 
             if (thisNode.getChildren()[index] == null) { //if a children is not found...
                 thisNode.getChildren()[index] = new Node(); //create it
-                nodeCount++;
+                this.nodeCount++;
             }
 
             thisNode = thisNode.getChildren()[index]; //go to the next node
         }
 
         if (thisNode.getValue() == 0) { // if the last node is 0, advance the word count
-            wordCount++;
-            thisNode.incrementValue(); //increment the count of the current node (because word was found)
+            this.wordCount++;
         }
+        thisNode.incrementValue(); //increment the count of the current node (because word was found)
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Trie implements ITrie {
         INode thisNode = root;
         String fixedWord = word.toLowerCase();
         int index = 0;
-        int letter = 0;
+        char letter;
         INode aChild = thisNode.getChildren()[index];
 
         for (int i = 0; i < fixedWord.length(); i++) { //traverse through the trie
@@ -47,14 +47,12 @@ public class Trie implements ITrie {
             index = letter - 'a';
             aChild = thisNode.getChildren()[index]; //child found
 
-            if (aChild == null) { //child not found
+            if (!(thisNode.getChildren()[index].getValue() > 0)) { //If it is greater than 0 return the child
+                return thisNode.getChildren()[index];
+            }
+            else if (aChild == null) { //child not found
                 return null;
             }
-        }
-        thisNode = aChild; //make the node be the final child
-
-        if (!(thisNode.getChildren()[index].getValue() <= 0)) { //If it is greater than 0 return the child
-            return thisNode.getChildren()[index];
         }
 
         return null;
