@@ -9,33 +9,54 @@ public class Trie implements ITrie {
     private int nodeCount = 1;
 
     @Override
-    public void add(String word) { //Do this next
+    public void add(String word) { //Check with TA
         INode thisNode = root;
         String fixedWord = word.toLowerCase();
         int index = 0;
         int letter = 0;
         //boolean fixedWordEnd = false;
 
-        for (int i = 0; i < fixedWord.length(); i++) {
+        for (int i = 0; i < fixedWord.length(); i++) { //traverse through the trie
             letter = fixedWord.charAt(i);
             index = letter - 'a';
 
-            if (thisNode.getChildren()[index] == null) {
-                thisNode.getChildren()[index] = new Node();
+            if (thisNode.getChildren()[index] == null) { //if a children is not found...
+                thisNode.getChildren()[index] = new Node(); //create it
                 nodeCount++;
             }
 
-            thisNode = thisNode.getChildren()[index];
+            thisNode = thisNode.getChildren()[index]; //go to the next node
         }
 
-        if (thisNode.getValue() == 0) {
+        if (thisNode.getValue() == 0) { // if the last node is 0, advance the word count
             wordCount++;
+            thisNode.incrementValue(); //increment the count of the current node (because word was found)
         }
-        thisNode.incrementValue();
     }
 
     @Override
-    public INode find(String word) { //Do this next
+    public INode find(String word) { //Check with TA
+        INode thisNode = root;
+        String fixedWord = word.toLowerCase();
+        int index = 0;
+        int letter = 0;
+        INode aChild = thisNode.getChildren()[index];
+
+        for (int i = 0; i < fixedWord.length(); i++) { //traverse through the trie
+            letter = fixedWord.charAt(i);
+            index = letter - 'a';
+            aChild = thisNode.getChildren()[index]; //child found
+
+            if (aChild == null) { //child not found
+                return null;
+            }
+        }
+        thisNode = aChild; //make the node be the final child
+
+        if (!(thisNode.getChildren()[index].getValue() <= 0)) { //If it is greater than 0 return the child
+            return thisNode.getChildren()[index];
+        }
+
         return null;
     }
 
