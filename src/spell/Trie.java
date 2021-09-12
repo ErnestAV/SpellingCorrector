@@ -6,45 +6,38 @@ public class Trie implements ITrie {
 
     private INode root;
     private int wordCount;
-    private int nodeCount;
+    private int nodeCount = 1;
 
     @Override
     public void add(String word) { //Do this next
-        INode currentNode = this.root;
+        INode thisNode = root;
         String fixedWord = word.toLowerCase();
         int index = 0;
         int letter = 0;
+        //boolean fixedWordEnd = false;
 
         for (int i = 0; i < fixedWord.length(); i++) {
             letter = fixedWord.charAt(i);
             index = letter - 'a';
 
+            if (thisNode.getChildren()[index] == null) {
+                thisNode.getChildren()[index] = new Node();
+                nodeCount++;
+            }
 
-
-        }
-    }
-
-    void insert(struct TrieNode *root, string key)
-    {
-        struct TrieNode *pCrawl = root;
-
-        for (int i = 0; i < key.length(); i++)
-        {
-            int index = key[i] - 'a';
-            if (!pCrawl->children[index])
-                pCrawl->children[index] = getNode();
-
-            pCrawl = pCrawl->children[index];
+            thisNode = thisNode.getChildren()[index];
         }
 
-        // mark last node as leaf
-        pCrawl->isEndOfWord = true;
+        if (thisNode.getValue() == 0) {
+            wordCount++;
+        }
+        thisNode.incrementValue();
     }
 
     @Override
-    public INode find(String word) {
+    public INode find(String word) { //Do this next
         return null;
-    } //Do this next
+    }
 
     @Override
     public int getWordCount() {

@@ -7,16 +7,17 @@ public class Node implements INode {
 
     @Override
     public int getValue() {
-        return count;
+        return this.count;
     }
 
     @Override
     public void incrementValue() {
-        count++;
+        this.count++;
     }
 
     @Override
     public INode[] getChildren() {
         return children;
     }
+
 }
