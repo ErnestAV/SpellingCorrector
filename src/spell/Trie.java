@@ -36,7 +36,7 @@ public class Trie implements ITrie {
 
     @Override
     public INode find(String word) { //Check with TA
-        INode thisNode = root;
+        INode thisNode = this.root;
         String fixedWord = word.toLowerCase();
         int index = 0;
         char letter;
@@ -47,22 +47,33 @@ public class Trie implements ITrie {
             index = letter - 'a';
             aChild = thisNode.getChildren()[index]; //child
 
+            if (aChild == null) {
+                return null;
+            }
+            else {
+                thisNode = thisNode.getChildren()[index];
+            }
+
+
+/**
             // TODO: 9/12/21 fix case when a word is found early (caresses vs caress test case) 
-            if (aChild == null) { //child not found
+            if (thisNode.getChildren()[index] == null) { //child not found
                 return null;
             }
-            /**
-            if (!(thisNode.getChildren()[index].getValue() > 0) && thisNode.getChildren()[index].getChildren() != null) {
-                return null;
+            if (i == fixedWord.length() - 1) {
+                if (!(thisNode.getChildren()[index].getValue() >= 0)) { //If it is greater than 0 return the child
+                    return thisNode.getChildren()[index];
+                }
             }
-             **/
-            if (!(thisNode.getChildren()[index].getValue() > 0)) { //If it is greater than 0 return the child
-                return thisNode.getChildren()[index];
-            }
-            //&& thisNode.getChildren()[index + 1] != null
+
+            thisNode = thisNode.getChildren()[index];
+ **/
+        }
+        if (thisNode == null || thisNode.getValue() == 0) {
+            return null;
         }
 
-        return null;
+        return thisNode;
     }
 
     @Override
