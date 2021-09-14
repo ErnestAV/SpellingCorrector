@@ -1,6 +1,8 @@
 package spell;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
@@ -8,8 +10,7 @@ import java.util.Scanner;
 public class SpellCorrector implements ISpellCorrector {
     @Override
     public void useDictionary(String dictionaryFileName) throws IOException {
-        File inputFile = new File(dictionaryFileName);
-        Scanner newScanner = new Scanner(inputFile);
+        Scanner newScanner = new Scanner(new File(dictionaryFileName));
 
         Trie newTrie = new Trie();
         String newWord;
@@ -18,6 +19,8 @@ public class SpellCorrector implements ISpellCorrector {
             newWord = newScanner.next().toLowerCase();
             newTrie.add(newWord);
         }
+
+        newScanner.close();
     }
 
     @Override

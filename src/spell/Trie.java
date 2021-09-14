@@ -159,17 +159,16 @@ public class Trie implements ITrie {
             INode child1 = n1.getChildren()[i];
             INode child2 = n2.getChildren()[i];
 
-            if (child1 == null && child2 != null || child1 != null && child2 == null) {
+            if (child1 == null && child2 != null || child1 != null && child2 == null
+            || child1 != null && !equals_Helper(child1, child2)) {
                 return false;
             }
-            else if (child1 == null && child2 == null) {
-                continue;
-            }
-            else if (child1 != null && child2 != null) {
-                if (!equals_Helper(child1, child2)) {
-                    return false;
-                }
-            }
+            //else if (child1 == null && child2 == null) {
+             //   continue;
+           // }
+           // else if (child1 != null && !equals_Helper(child1, child2)) {
+           //     return false;
+           // }
         }
 
         return true;
