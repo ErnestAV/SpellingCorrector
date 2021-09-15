@@ -435,6 +435,7 @@ public class SpellTest {
         try {
             suggestion = studentCorrector.suggestSimilarWord(word);
         } catch (Throwable t) {
+            t.printStackTrace();
             fail("Student code threw: " + t.getMessage());
         }
         return suggestion;
