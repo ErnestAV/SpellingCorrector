@@ -53,21 +53,6 @@ public class Trie implements ITrie {
             else {
                 thisNode = thisNode.getChildren()[index];
             }
-
-
-/**
-            // TODO: 9/12/21 fix case when a word is found early (caresses vs caress test case) 
-            if (thisNode.getChildren()[index] == null) { //child not found
-                return null;
-            }
-            if (i == fixedWord.length() - 1) {
-                if (!(thisNode.getChildren()[index].getValue() >= 0)) { //If it is greater than 0 return the child
-                    return thisNode.getChildren()[index];
-                }
-            }
-
-            thisNode = thisNode.getChildren()[index];
- **/
         }
         if (thisNode == null || thisNode.getValue() == 0) {
             return null;
@@ -120,25 +105,19 @@ public class Trie implements ITrie {
     //equals
     @Override
     public boolean equals(Object o) {
-
-        //is o == null?
         if (o == null) {
             return false;
         }
-
-        //is o == this?
         if (o == this) {
             return true;
         }
 
-        //do this and node have the same class?
         if (this.getClass() != o.getClass()) {
             return false;
         }
 
         Trie d = (Trie) o;
 
-        //do this and d have the same wordCount and nodeCount?
         if (d.wordCount != this.wordCount || d.nodeCount != this.nodeCount) {
             return false;
         }
@@ -163,12 +142,6 @@ public class Trie implements ITrie {
             || child1 != null && !equals_Helper(child1, child2)) {
                 return false;
             }
-            //else if (child1 == null && child2 == null) {
-             //   continue;
-           // }
-           // else if (child1 != null && !equals_Helper(child1, child2)) {
-           //     return false;
-           // }
         }
 
         return true;

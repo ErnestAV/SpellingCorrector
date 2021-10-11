@@ -28,9 +28,6 @@ public class SpellCorrector implements ISpellCorrector {
     @Override
     public String suggestSimilarWord(String inputWord) {
 
-        //Map<String, Integer> correctWords;
-
-        //if not null return it as lower case
         if (myDictionary.find(inputWord) == null) {
 
             TreeSet<String> allCandidates = new TreeSet<String>();
@@ -39,21 +36,11 @@ public class SpellCorrector implements ISpellCorrector {
             int highestCount = 0;
             String suggestedWord = null;
 
-            //TA-PSEUDO
-            //run on original input word
-            //algorithm
-            //insertion
-            //deletion
-            //transposition (swapping)
-            //alteration (changing values)
-
-            //ADD ALL OF THESE TO ALLCANDIDATES (for string s: insertionSet) --> allCandidates.add(s) (do for all 4)
             allCandidates.addAll(insertionD(inputWord));
             allCandidates.addAll(deletionD(inputWord));
             allCandidates.addAll(transpositionD(inputWord));
             allCandidates.addAll(alterationD(inputWord));
-            //Once all candidates is complete
-            //Do for (string s: allCandidates) --> call trie.find in all of those --> if the word is found, add it correctWords.
+
             for (String s : allCandidates) {
                 if (myDictionary.find(s) != null) {
                     if (myDictionary.find(s).getValue() > highestCount) {
@@ -63,9 +50,6 @@ public class SpellCorrector implements ISpellCorrector {
                 }
             }
 
-            //if correctWords.size > 1 --> do precedenceCheck --> look at the count of all the nodes and have a current highest
-            // if correctWords.size == 1 --> return that word
-            // if correctWords.size < 1 --> call all 4 functions on allCandidates and put them into allCandidates2 and call all 4 functions again
             if (suggestedWord == null) {
                 for (String s : allCandidates) {
                     correctWords.addAll(insertionD(s));
@@ -87,40 +71,6 @@ public class SpellCorrector implements ISpellCorrector {
             else {
                 return suggestedWord;
             }
-            /**
-             if (correctWords.size() > 1) {
-             for (String s : correctWords) {
-             if (myDictionary.find(s).getValue() > highestCount) {
-             suggestedWord = s;
-             highestCount = myDictionary.find(s).getValue();
-             }
-             }
-             return suggestedWord;
-             }
-             else if (correctWords.size() == 1){
-             suggestedWord = correctWords.toString();
-             return suggestedWord;
-             }
-             else if (correctWords.size() < 1) {
-             for (String s : allCandidates) {
-             allCandidates2.addAll(insertionD(s));
-             allCandidates2.addAll(deletionD(s));
-             allCandidates2.addAll(transpositionD(s));
-             allCandidates2.addAll(alterationD(s));
-             }
-             for (String s : allCandidates2) {
-             if (myDictionary.find(s) != null) {
-             correctWords2.add(s);
-             }
-             }
-             for (String j : correctWords2) {
-             if (myDictionary.find(j).getValue() > highestCount) {
-             suggestedWord = j;
-             highestCount = myDictionary.find(j).getValue();
-             }
-             }
-             return suggestedWord;
-             } **/
         }
 
         return inputWord.toLowerCase();
@@ -188,30 +138,4 @@ public class SpellCorrector implements ISpellCorrector {
 
         return wordsToSwap;
     }
-
-    /** FAILED ATTEMPT TO USE A MAP
-     private Map<String, Integer> getValidWords(ArrayList<String> array) {
-     Map<String, Integer> dataMap = new HashMap<String, Integer>();
-
-     INode newNode;
-
-     for (String inputWord : array) {
-     newNode = myDictionary.find(inputWord);
-
-     if (newNode != null) {
-     dataMap.put(inputWord, newNode.getValue());
-     }
-     }
-     return dataMap;
-     }
-
-     private Map<String, Integer> getValidWordsP2(ArrayList<String> array) {
-     ArrayList<String> newArray = new ArrayList<String>();
-
-     for (String string : array) {
-     newArray.addAll(alterationD(string));
-     }
-     return getValidWords(newArray);
-     }
-     **/
 }

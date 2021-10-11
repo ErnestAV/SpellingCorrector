@@ -1,9 +1,6 @@
 
 Q	java:S125"<This block of commented-out lines of code should be removed.(—é¨¨
-H
-java:S1135;"2Complete the task associated to this TODO comment.(ôéÿÏ
-c	java:S100d"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï¤‹¥
-i	java:S100•"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è€°íùÿÿÿÿ
-R	java:S125¦"<This block of commented-out lines of code should be removed.(Ö¥—Ê
+c	java:S100U"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ï¤‹¥
+i	java:S100€"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è€°íùÿÿÿÿ
 G
 java:S1128"1Remove this unused import 'java.util.Dictionary'.(¸Ûãó
